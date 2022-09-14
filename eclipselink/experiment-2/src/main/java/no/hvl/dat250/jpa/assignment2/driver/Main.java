@@ -1,7 +1,7 @@
 package no.hvl.dat250.jpa.assignment2.driver;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,9 +15,10 @@ import no.hvl.dat250.jpa.assignment2.Pincode;
 
 public class Main {
     public static final String PERSISTENCE_UNIT_NAME = "experiment2";
+    private static EntityManagerFactory factory;
 
     public static void main(String[] args) {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+        factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
         EntityManager em = factory.createEntityManager();
 
         em.getTransaction().begin();
@@ -48,11 +49,11 @@ public class Main {
         bank.setName("Pengebank");
         
         // Associations of the variables
-        List<Address> adresses = new ArrayList<>();
+        Set<Address> adresses = new HashSet<>();
         adresses.add(address);
         person.setAddresses(adresses);
         
-        List<Person> persons = new ArrayList<>();
+        Set<Person> persons = new HashSet<>();
         persons.add(person);
         address.setOwners(persons);
                
@@ -64,25 +65,24 @@ public class Main {
         creditCard2.setOwningBank(bank);
         creditCard2.setPincode(pincode);
         
-        List<CreditCard> creditCards = new ArrayList<>();
+        Set<CreditCard> creditCards = new HashSet<>();
         creditCards.add(creditCard1);
         creditCards.add(creditCard2);
+
         
-        bank.setOwnedCards(creditCards);
-        
+        bank.setOwnedCards(creditCards);     
         person.setCreditCards(creditCards);
         
         
-        
         em.persist(person);
-        em.persist(creditCard1);
         em.persist(creditCard2);
-        em.persist(address);
+        em.persist(creditCard1);
+		em.persist(address);
         em.persist(pincode);
         em.persist(bank);
         em.getTransaction().commit();
 
-        //em.close();
-        System.out.println("Exit");
+        em.close();
+        
     }
 }

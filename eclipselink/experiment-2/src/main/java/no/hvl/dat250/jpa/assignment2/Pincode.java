@@ -13,5 +13,4 @@ public class Pincode {
     private String pincode;
     private int count;
 
-   
 }

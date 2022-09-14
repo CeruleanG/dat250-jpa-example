@@ -2,14 +2,16 @@ package no.hvl.dat250.jpa.assignment2;
 
 import javax.persistence.*;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-
-import java.util.List;
+import java.util.Set;
 
 @Entity
-@Data
-
+@Getter
+@Setter
+@NoArgsConstructor
 public class Bank {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +19,5 @@ public class Bank {
     private String name;
     
     @OneToMany(mappedBy = "owningBank")
-    private List<CreditCard> ownedCards;
-
+    private Set<CreditCard> ownedCards;
 }

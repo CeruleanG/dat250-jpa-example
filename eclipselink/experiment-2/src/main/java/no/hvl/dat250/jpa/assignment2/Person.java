@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 import lombok.Data;
 
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -14,15 +14,14 @@ public class Person {
     private Long id;
     private String name;
     
-    private List<CreditCard> creditCards;
+    private Set<CreditCard> creditCards;
     
-    @ManyToMany//(mappedBy = "owners", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinTable(
+    @ManyToMany
+    /*@JoinTable(
     		  name = "person_address", 
     		  joinColumns = @JoinColumn(name = "person_id"), 
-    		  inverseJoinColumns = @JoinColumn(name = "address_id"))
-    private List<Address> addresses;
+    		  inverseJoinColumns = @JoinColumn(name = "address_id"))*/
+    private Set<Address> addresses;
     
 
-   
 }

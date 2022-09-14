@@ -1,5 +1,6 @@
 package no.hvl.dat250.jpa.assignment2;
 
+
 import javax.persistence.*;
 
 import lombok.Data;
@@ -15,10 +16,7 @@ public class CreditCard {
     private int balance;
     private Pincode pincode;
     
-    @ManyToOne(targetEntity = Bank.class)
-    //@JoinTable
-    		
+    @ManyToOne
     private Bank owningBank;
-    
   
 }
